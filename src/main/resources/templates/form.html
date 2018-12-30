@@ -7,12 +7,20 @@
 
         <h1>Sign up to the event using this form</h1>
 
-        <form action="#" th:action="@{/form}" method="POST">
+        <form action="#" th:action="@{/register}" method="GET">
             <p><label for="name">Name</label>: <input type="text" name="name" id="name"/></p>
             <p><label for="address">Address</label>: <input type="text" name="address" id="address"/></p>
             <p><input type="submit" value="Submit" /></p>
         </form>
 
         <p></p>
+
+        <!--FIXME A5:2017-Broken Access Control-->
+        <h1>People who have already signed up</h1>
+        <ul>
+            <!--FIXME A7:2017-Cross-Site Scripting (XSS)-->
+            <!--using unescaped text in Thymeleaf opens the gate to XSS-->
+            <li th:each="item: ${list}" th:utext="${item.getName()} + ' -> ' + ${item.getAddress()}">Text here</li>
+        </ul>
     </body>
 </html>
